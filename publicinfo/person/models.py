@@ -1,6 +1,6 @@
 from django.db import models
 from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
-
+from django_countries.fields import CountryField
 # Create your models here.
 
 class Person(models.Model):
@@ -30,6 +30,19 @@ class Person(models.Model):
     state = USStateField()
     city = models.CharField(max_length=50)
     zipcode = USZipCodeField()
+    country = CountryField(default='US')
 
     def __str__(self):
         return "{0} {1} {2}".format(self.first_name, self.middle_name, self.last_name)
+
+
+class Page(models.Model):
+    person = models.ForeignKey(Person)
+    name_slug = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    state = USStateField()
+    country = CountryField(default='US')
+    zipcode = USZipCodeField(default=10012)
+    title = models.CharField(max_length=200)
+    key_words = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
