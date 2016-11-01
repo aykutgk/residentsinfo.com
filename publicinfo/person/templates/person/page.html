@@ -1,105 +1,113 @@
 {% extends "base.html" %}
-{% block title %}{% endblock %}
-{% block key_words %}{% endblock %}
-{% block description %}{% endblock %}
+{% block title %}{{object.title}}{% endblock %}
+{% block description %}{{object.description}}{% endblock %}
 {% block content %}
-<div class="row">
-  <div class="col-md-6">
+<div class="row" style="margin-top: 10px;">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h1 class="text-center">Resident Information</h1></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
 
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="list-group">
-          <li class="list-group-item active">
-            <h4 class="list-group-item-heading"><h2 class="text-center">{{full_name}}</h2></h4>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Born</h4>
-            <p class="list-group-item-text">{{date_of_birth}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Gender</h4>
-            <p class="list-group-item-text">{{gender}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Race</h4>
-            <p class="list-group-item-text">{{race}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">First Name</h4>
-            <p class="list-group-item-text">{{first_name}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Last Name</h4>
-            <p class="list-group-item-text">{{last_name}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Middle Name</h4>
-            <p class="list-group-item-text">{{middle_name}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Phone Number</h4>
-            <p class="list-group-item-text">{{phone_number}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Email</h4>
-            <p class="list-group-item-text">{{email}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Facebook Account</h4>
-            <p class="list-group-item-text"><a href="{{facebook_link}}">{{facebook_link}}</a></p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Linkedin Account</h4>
-            <p class="list-group-item-text"><a href="{{linkedin_link}}">{{linkedin_link}}</a></p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="row">
-      <div class="col-md-12" style="margin-bottom: 10px;">
-        <div id="map"></div>
-        <script>
-        function initMap() {
-          var uluru = {lat: -25.363, lng: 131.044};
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru
-          });
-          var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-          });
-        }
-        </script>
-      </div>
-      <div class="col-md-12">
-        <ul class="list-group">
-          <li class="list-group-item active">
-            <h4 class="list-group-item-heading"><h3 class="text-center">{{full_address}}</h3></h4>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Address</h4>
-            <p class="list-group-item-text">{{address}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">State</h4>
-            <p class="list-group-item-text">{{state}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">City</h4>
-            <p class="list-group-item-text">{{city}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Zip Code</h4>
-            <p class="list-group-item-text">{{zipcode}}</p>
-          </li>
-          <li class="list-group-item">
-            <h4 class="list-group-item-heading">Country</h4>
-            <p class="list-group-item-text">{{country}}</p>
-          </li>
-        </ul>
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="list-group">
+                  <li class="list-group-item active">
+                    <h4 class="list-group-item-heading"><h2 class="text-center">{{object.person.first_name}}{% if object.person.middle_name %} {{object.person.middle_name}}{% endif%} {{object.person.last_name}}</h2></h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Born</h4>
+                    <p class="list-group-item-text">{{object.person.date_of_birth}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Gender</h4>
+                    <p class="list-group-item-text">{{object.person.gender}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Race</h4>
+                    <p class="list-group-item-text">{{object.person.race}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">First Name</h4>
+                    <p class="list-group-item-text">{{object.person.first_name}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Last Name</h4>
+                    <p class="list-group-item-text">{{object.person.last_name}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Middle Name</h4>
+                    <p class="list-group-item-text">{{object.person.middle_name}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Phone Number</h4>
+                    <p class="list-group-item-text">{{object.person.phone_number}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Email</h4>
+                    <p class="list-group-item-text">{{object.person.email}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Facebook Account</h4>
+                    <p class="list-group-item-text"><a href="{{facebook_link}}">{{object.person.facebook_link}}</a></p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Linkedin Account</h4>
+                    <p class="list-group-item-text"><a href="{{linkedin_link}}">{{object.person.linkedin_link}}</a></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12" style="margin-bottom: 10px;">
+                <div id="map"></div>
+                <script>
+                function initMap() {
+                  var uluru = {lat: {{object.primary_latitude}}, lng: {{object.primary_longitude}}};
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 4,
+                    center: uluru
+                  });
+                  var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                  });
+                }
+                </script>
+              </div>
+              <div class="col-md-12">
+                <ul class="list-group">
+                  <li class="list-group-item active">
+                    <h4 class="list-group-item-heading"><h3 class="text-center">{{object.person.full_address}}</h3></h4>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Address</h4>
+                    <p class="list-group-item-text">{{object.person.address}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">State</h4>
+                    <p class="list-group-item-text">{{object.state}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">City</h4>
+                    <p class="list-group-item-text">{{object.city}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Zip Code</h4>
+                    <p class="list-group-item-text">{{object.zipcode}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading">Country</h4>
+                    <p class="list-group-item-text">{{object.country}}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

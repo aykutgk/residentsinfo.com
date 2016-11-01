@@ -1,6 +1,7 @@
 from django.db import models
 from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
 from django_countries.fields import CountryField
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 class Person(models.Model):
@@ -38,7 +39,7 @@ class Person(models.Model):
 
 class Page(models.Model):
     person = models.ForeignKey(Person)
-    name_slug = models.CharField(max_length=200)
+    slug = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     state = USStateField()
     country = CountryField(default='US')
@@ -46,3 +47,11 @@ class Page(models.Model):
     title = models.CharField(max_length=200)
     key_words = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    primary_latitude = models.FloatField(null=True)
+    primary_longitude = models.FloatField(null=True)
+
+    def get_absolute_url(self):
+        return reverse('person_detail_page', args=[self.id, self.state, self.city.replace(" ", "-").replace("(", "").replace(")", "").replace("'", "-").replace(".", ""), self.slug.replace(".", "-")])
+
+    def __str__(self):
+        return "{0} {1} {2}".format(self.slug, self.state, self.city)

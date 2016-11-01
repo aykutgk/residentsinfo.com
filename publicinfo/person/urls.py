@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^info/([0-9]{4})/$', views.page, name='page'),
+    url(r'^(?P<pk>[0-9]+)/(?P<city>[\w-]+)/(?P<state>[\w-]+)/(?P<slug>[\w-]+)/$', views.PageDetailView.as_view(), name='person_detail_page'),
 ]

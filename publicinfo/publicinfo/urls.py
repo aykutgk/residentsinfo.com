@@ -15,8 +15,23 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import GenericSitemap
+from person.models import Page
+from person.views import PageListView
+
+info_dict = {
+    'queryset': Page.objects.all(),
+    'slug': 'slug',
+    'state': 'state',
+    'city': 'city'
+}
 
 urlpatterns = [
+    #url(r'^', PageListView.as_view(), name='person_list_page'),
     url(r'^person/', include('person.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^dj_admin-2081238/', admin.site.urls),
+    url(r'^sitemap\.xml$', sitemap,
+        {'sitemaps': {'page': GenericSitemap(info_dict, priority=0.6)}},
+        name='django.contrib.sitemaps.views.sitemap'),
 ]
