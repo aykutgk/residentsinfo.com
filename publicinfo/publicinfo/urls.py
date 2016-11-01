@@ -28,7 +28,7 @@ info_dict = {
 }
 
 urlpatterns = [
-    #url(r'^', PageListView.as_view(), name='person_list_page'),
+    url(r'^$', PageListView.as_view(), name='person_list_page'),
     url(r'^person/', include('person.urls')),
     url(r'^dj_admin-2081238/', admin.site.urls),
     url(r'^sitemap\.xml$', sitemap,
